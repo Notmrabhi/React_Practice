@@ -3,7 +3,12 @@ import { MdDownloadForOffline } from "react-icons/md";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { motion } from "framer-motion"
 
-function Card({data, referance}) {
+function Card({data, onDelete, referance}) {
+
+    const handleDelete = () => {
+        onDelete(data.id);
+    };
+
   return (
     <motion.div drag dragConstraints={referance} whileDrag={{scale:1.2}} dragElastic={1}>
         <div className="relative w-60 h-72 rounded-[40px] bg-zinc-900/90 text-white py-8 px-5 overflow-hidden ">
@@ -12,8 +17,8 @@ function Card({data, referance}) {
         <div className="absolute bottom-0 left-0 w-full">
             <div className="flex items-center justify-between mb-1 py-3 px-8">
                 <h5>{data.filesize}</h5>
-                <span className="w-5 h-5  rounded-full">
-                    {data.close == true ? <IoMdCloseCircleOutline /> : <MdDownloadForOffline size="1.3em"/>}
+                <span className="w-5 h-5  rounded-full cursor-pointer" >
+                    {data.close == true ? <IoMdCloseCircleOutline onClick={handleDelete} /> : <MdDownloadForOffline size="1.3em"/>}
                     
                 </span>
             </div>
